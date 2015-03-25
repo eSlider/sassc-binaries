@@ -1,0 +1,23 @@
+{
+    "name": "eslider/sasscb",
+    "description": "SASS compiler binaries",
+    "keywords": ["sass", "compiler"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andriy Oblivantsev"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+            "eSlider\\sassc": "/"
+        }
+    }
+}
