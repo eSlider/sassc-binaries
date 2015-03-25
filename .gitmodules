@@ -1,0 +1,3 @@
+[submodule "compass-mixins"]
+	path = compass-mixins
+	url = https://github.com/Igosuki/compass-mixins
