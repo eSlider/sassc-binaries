@@ -9,9 +9,6 @@
             "name": "Andriy Oblivantsev"
         }
     ],
-    "require": {
-        "php": ">=5.3.0"
-    },
     "config": {
         "bin-dir": "bin"
     },
