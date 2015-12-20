@@ -1,7 +1,7 @@
 Libsass Binaries
 ================
 
-Static binaries for Windows and Linux
+Static binaries for Windows, Mac OS  and Linux
 
 Referer 
 -------

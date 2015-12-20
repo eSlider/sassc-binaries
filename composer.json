@@ -1,12 +1,14 @@
 {
     "name": "eslider/sasscb",
     "description": "SASS compiler binaries",
-    "keywords": ["sass", "compiler"],
+    "keywords": ["scss", "compiler", "assets", "compression", "minification" ],
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Andriy Oblivantsev"
+            "name": "Andriy Oblivantsev",
+            "email": "eslider@gmail.com",
+            "homepage": "https://github.com/eSlider/"
         }
     ],
     "config": {
@@ -14,7 +16,8 @@
     },
     "autoload": {
         "psr-0": {
-            "eSlider\\sassc": "/"
+            "eSlider\\sassc": "/",
+            "Eslider": "src/"
         }
     }
 }
