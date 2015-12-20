@@ -21,8 +21,6 @@
     "bin-dir": "bin"
   },
   "autoload": {
-    "psr-4": {
-      "": "src/"
-    }
+    "psr-0": { "Eslider": "src/" }
   }
 }
