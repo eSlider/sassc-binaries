@@ -14,15 +14,13 @@
     {
       "name": "Andriy Oblivantsev",
       "email": "eslider@gmail.com",
-      "homepage": "https://github.com/eSlider/"
+      "homepage": "https://github.com/eSlider"
     }
   ],
   "config": {
     "bin-dir": "bin"
   },
   "autoload": {
-    "psr-4": {
-      "": "src/"
-    }
+    "psr-0": { "Eslider": "src/" }
   }
 }
