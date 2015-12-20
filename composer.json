@@ -23,9 +23,9 @@
   "autoload": {
     "psr-4": {
       "": "src/"
-    }
+    },
     "psr-0": {
-      "eSlider\\sassc": "/",
+      "eSlider\\sassc": "/"
     }
   }
 }
