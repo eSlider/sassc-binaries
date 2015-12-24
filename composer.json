@@ -21,6 +21,11 @@
     "bin-dir": "bin"
   },
   "autoload": {
-    "psr-0": { "Eslider": "src/" }
+    "psr-0": {
+      "Eslider": "src/"
+    }
+  },
+  "suggest": {
+    "kriswallsmith/assetic": "Asset Management for PHP"
   }
 }
