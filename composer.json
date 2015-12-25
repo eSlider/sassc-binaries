@@ -17,13 +17,14 @@
       "homepage": "https://github.com/eSlider"
     }
   ],
+  "require": {
+    "php": ">=5.3.19"
+  },
   "config": {
     "bin-dir": "bin"
   },
   "autoload": {
-    "psr-0": {
-      "Eslider": "src/Eslider/"
-    }
+    "psr-0": { "Eslider\\": "src/" }
   },
   "suggest": {
     "kriswallsmith/assetic": "Asset Management for PHP"
