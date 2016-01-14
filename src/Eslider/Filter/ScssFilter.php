@@ -76,10 +76,6 @@ class ScssFilter extends SassFilter
             $pb->add('--unix-newlines');
         }
 
-        if (true === $this->scss || (null === $this->scss && 'scss' == pathinfo($asset->getSourcePath(), PATHINFO_EXTENSION))) {
-            $pb->add('--scss');
-        }
-
         if ($this->style) {
             $pb->add('--style')->add($this->style);
         }
