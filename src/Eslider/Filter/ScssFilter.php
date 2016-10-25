@@ -60,10 +60,33 @@ class ScssFilter extends SassFilter
         $this->setScss(true);
     }
 
-    /**
+     /**
      * @param AssetInterface $asset
      */
     public function filterLoad(AssetInterface $asset)
+    {
+        $css = "";
+        $sassProcessArgs = array($this->sassPath);
+        foreach ($this->loadPaths as $loadPath) {
+            $sassProcessArgs[] = '--load-path';
+            $sassProcessArgs[] = escapeshellarg($loadPath);
+        }
+      
+        $scss = $asset->getContent();
+        $tempDir = sys_get_temp_dir();
+        $temp = tempnam($tempDir, "scss");
+        file_put_contents($temp, $scss);
+        $sassProcessArgs[] = escapeshellarg($temp);
+        $cmd = implode(" ", $sassProcessArgs);
+        $css =  `$cmd`;
+        unlink($temp);
+        $asset->setContent($css);
+    }
+    
+    /**
+     * @param AssetInterface $asset
+     */
+    public function filterLoad2(AssetInterface $asset)
     {
         $sassProcessArgs = array($this->sassPath);
         $pb              = $this->createProcessBuilder($sassProcessArgs);
