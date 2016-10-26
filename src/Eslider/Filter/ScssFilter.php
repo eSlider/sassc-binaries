@@ -25,6 +25,11 @@ class ScssFilter extends SassFilter
     private $noCache;
 
     /**
+     * @var string Operation system short name
+     */
+    protected $osName;
+
+    /**
      * ScssFilter constructor.
      *
      * @param string $binPath Bin path.
@@ -34,8 +39,9 @@ class ScssFilter extends SassFilter
         $binName = "sassc";
         $is32bit = PHP_INT_SIZE <= 4;
         $binPath || $binPath = realpath(__DIR__ . "/../../../dist");
+        $this->osName = strtoupper(substr(PHP_OS, 0, 3));
 
-        switch (strtoupper(substr(PHP_OS, 0, 3))) {
+        switch ($this->osName) {
             // WINNT, CYGWIN_NT-5.1 Windows, Windows Server, etc.
             case 'CYG':
             case 'WIN':
@@ -64,6 +70,43 @@ class ScssFilter extends SassFilter
      * @param AssetInterface $asset
      */
     public function filterLoad(AssetInterface $asset)
+    {
+        if ($this->isWindows()) {
+            $asset->setContent($this->generateCssOnWindows($asset));
+        } else {
+            $asset->setContent($this->generateCssOnLinux($asset));
+        }
+    }
+
+    /**
+     * @param AssetInterface $asset
+     * @return string CSS
+     */
+    public function generateCssOnWindows(AssetInterface $asset)
+    {
+        $css             = "";
+        $sassProcessArgs = array($this->sassPath);
+        foreach ($this->loadPaths as $loadPath) {
+            $sassProcessArgs[] = '--load-path';
+            $sassProcessArgs[] = escapeshellarg($loadPath);
+        }
+
+        $scss    = $asset->getContent();
+        $tempDir = sys_get_temp_dir();
+        $temp    = tempnam($tempDir, "scss");
+        file_put_contents($temp, $scss);
+        $sassProcessArgs[] = escapeshellarg($temp);
+        $cmd               = implode(" ", $sassProcessArgs);
+        $css               = `$cmd`;
+        unlink($temp);
+        return $css;
+    }
+
+    /**
+     * @param AssetInterface $asset
+     * @return string CSS
+     */
+    public function generateCssOnLinux($asset)
     {
         $sassProcessArgs = array($this->sassPath);
         $pb              = $this->createProcessBuilder($sassProcessArgs);
@@ -123,6 +166,14 @@ class ScssFilter extends SassFilter
             throw FilterException::fromProcess($proc)->setInput($asset->getContent());
         }
 
-        $asset->setContent($proc->getOutput());
+        return $proc->getOutput();
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isWindows()
+    {
+        return $this->osName == 'CYG' || $this->osName == 'WIN';
     }
 }
