@@ -85,7 +85,7 @@ class ScssFilter extends SassFilter
     public function generateCssOnWindows(AssetInterface $asset)
     {
         $css             = "";
-        $sassProcessArgs = array($this->sassPath);
+        $sassProcessArgs = array(escapeshellarg($this->sassPath));
         foreach ($this->loadPaths as $loadPath) {
             $sassProcessArgs[] = '--load-path';
             $sassProcessArgs[] = escapeshellarg($loadPath);
